@@ -1,4 +1,4 @@
-var data = [{item:'do exercise'},{item:'complete assignment'},{item:'watch friends'}];
+var data = [];
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false});
 module.exports = function(app){
@@ -10,10 +10,13 @@ module.exports = function(app){
     app.post('/todo', urlencodedParser, function(req,res){
         data.push(req.body);
         res.json(data);
-        console.log(req.body);
+        //console.log(req.body);
     });
 
-    app.delete('/todo',function(req,res){
-
+    app.delete('/todo/:item', function(req,res){
+        data = data.filter(function(todo){
+            return todo.item.replace(/ /g, '-') !== req.params.item;
+        });
+        res.json(data);
     });
 }
