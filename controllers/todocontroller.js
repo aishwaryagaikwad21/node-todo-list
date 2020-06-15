@@ -1,4 +1,4 @@
-var data = [];
+
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false});
 var mongoose = require("mongoose"); //connecting node js environment with mongobd
